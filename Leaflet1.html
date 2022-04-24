@@ -56,6 +56,27 @@ marker.bindPopup ("I am here haha<br>I am a popup").openPopup();
 circle.bindPopup("I am a circle");
 polygon.bindPopup("I am a polygon");
 
-L.control.locate().addTo(map);
+if (!navigator.geolocation){
+    console.log("Your browser doesn't support geolocation feature!")
+} else {
+    navigator.geolocation.getCurrentPosition(getPosition)
+}
+
+function getPosition(position){
+//console.log(position)
+var lat = position.coords.latitude
+var long = position.coords.longitude 
+var accuracy =position.coords.accuracy
+
+var marker =L.marker([lat, long])
+var circle= L.circle([lat, long], {radius: accuracy})
+
+var featureGroup = L.featureGroup ([marker, circle]).addTo(map)
+
+console.log("Your coordinates is: Lat: "+ lat +" long: "+ long+ " Accuracy: "+ accuracy)
+}
+
+
+
 
 </script>
