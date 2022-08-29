@@ -59,8 +59,13 @@ polygon.bindPopup("I am a polygon");
 if (!navigator.geolocation){
     console.log("Your browser doesn't support geolocation feature!")
 } else {
-    navigator.geolocation.getCurrentPosition(getPosition)
+    setInterval (() => {
+        navigator.geolocation.getCurrentPosition(getPosition)
+
+    }, 5000)
 }
+
+var marker, circle;
 
 function getPosition(position){
 //console.log(position)
@@ -68,12 +73,21 @@ var lat = position.coords.latitude
 var long = position.coords.longitude 
 var accuracy =position.coords.accuracy
 
-var marker =L.marker([lat, long])
-var circle= L.circle([lat, long], {radius: accuracy})
+if(marker) {
+    map.removeLayer(marker)
+}
+
+if(circle) {
+    map.removeLayer(circle)
+}
+
+marker =L.marker([lat, long])
+circle= L.circle([lat, long], {radius: accuracy})
 
 var featureGroup = L.featureGroup ([marker, circle]).addTo(map)
+map.fitBounds (featureGroup.getBounds())
 
-console.log("Your coordinates is: Lat: "+ lat +" long: "+ long+ " Accuracy: "+ accuracy)
+console.log("Your coordinates is: Lat: "+ lat +" Long: "+ long+ " Accuracy: "+ accuracy)
 }
 
 
