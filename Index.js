@@ -1,4 +1,4 @@
-const L = Window.L;
+const L = window.L;
 
 var map = L.map('map').setView([51.505, 0.1276], 13)
 
