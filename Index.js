@@ -1,7 +1,11 @@
+console.log("i am called after config.js");
 const L = window.L;
-var access = config.ACESS_TOKEN;
+console.log(window.config);
+var access = window.config.ACESS_TOKEN;
 
 var map = L.map('map').setView([51.505, 0.1276], 13)
+
+
 
    var osm = L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?' + access, {
     attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
